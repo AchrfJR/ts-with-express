@@ -111,7 +111,8 @@
   , "include": [
     "src/**/*.ts",
     "src/db/**/*.ts",
-    "src/migrations/**/*.*"
+    "src/migrations/**/*.*",
+    ""
   ],
   "exclude": ["node_modules"]
 
