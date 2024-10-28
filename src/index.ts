@@ -10,13 +10,20 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 (
     async()=>{
 
-    const db = await open({
-        filename : path.join(__dirname , "sqLiteDb.sqlite"), 
-        driver:sqlite3.Database
-    }) 
-    await db.migrate({
-        migrationsPath : path.join(__dirname , "migrations")
-    })
+    try {
+        const db = await open({
+            filename: path.join(__dirname, "./db", "sqLiteDb.sqlite"),
+            driver: sqlite3.Database,
+        });
+        
+        await db.migrate({
+            migrationsPath: path.join(__dirname, "migrations"),
+        });
+        console.log("Database connected and migrations applied successfully.");
+    } catch (error) {
+        console.error("Error initializing database:", error);
+        // process.exit(1); // Exit if there's a failure
+    }
     const app = express()
 
     app.use(express.json())
